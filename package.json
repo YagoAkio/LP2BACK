@@ -1,0 +1,26 @@
+{
+  "name": "backendcclp2",
+  "version": "1.0.0",
+  "description": "Projeto de backend cadastros básicos",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test":"echo \"Error: no test specified\" && exit 1",
+    "start":"node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RenatoFernandoSilvaGoncalves/BackendCCLP2.git"
+  },
+  "author": "Renato Gonçalves",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RenatoFernandoSilvaGoncalves/BackendCCLP2/issues"
+  },
+  "homepage": "https://github.com/RenatoFernandoSilvaGoncalves/BackendCCLP2#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mysql2": "^3.6.3"
+  }
+}
