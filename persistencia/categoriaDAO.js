@@ -57,32 +57,37 @@ export default class CategoriaDAO{
         }
     }
 
-    async consultar(parametroConsulta){
-        let sql='';
-        let parametros=[];
-        //é um número inteiro?
-        if (!isNaN(parseInt(parametroConsulta))){
-            //consultar pelo código da categoria
-            sql='SELECT * FROM categoria WHERE codigo = ? order by descricao';
+    async consultar(parametroConsulta) {
+        let sql = '';
+        let parametros = [];
+        
+        if (!isNaN(parseInt(parametroConsulta))) {
+            // Consultar pelo código da categoria
+            sql = 'SELECT * FROM categoria WHERE codigo = ? ORDER BY descricao';
             parametros = [parametroConsulta];
-        }
-        else{
-            //consultar pela descricao
-            if (!parametroConsulta){
+        } else {
+            // Consultar pela descrição
+            if (!parametroConsulta) {
                 parametroConsulta = '';
             }
-            sql = "SELECT * FROM categoria WHERE descricao like ?";
-            parametros = ['%'+parametroConsulta+'%'];
+            sql = "SELECT * FROM categoria WHERE descricao LIKE ?";
+            parametros = ['%' + parametroConsulta + '%'];
         }
-        const conexao = await conectar();
-        const [registros, campos] = await conexao.execute(sql,parametros);
-        let listaCategoria = [];
-         for (const registro of registros){
-            const categoria = new Categoria(registro['codigo'],
-                                            registro['descricao']    
-            );
-            listaCategoria.push(categoria);
+    
+        const conexao = await conectar(); // Retorna uma conexão
+        try {
+            const [registros] = await conexao.execute(sql, parametros);
+            let listaCategoria = [];
+            for (const registro of registros) {
+                const categoria = new Categoria(registro['codigo'], registro['descricao']);
+                listaCategoria.push(categoria);
+            }
+            return listaCategoria;
+        } catch (erro) {
+            console.error("Erro ao consultar categorias:", erro);
+            throw erro;
+        } finally {
+            global.poolConexoes.releaseConnection(conexao); // Libera a conexão
         }
-        return listaCategoria;
     }
 }
