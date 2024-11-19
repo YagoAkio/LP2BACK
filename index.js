@@ -16,6 +16,7 @@ app.use(cors({origin:'*'}));
 app.use(express.json());
 app.use('/categoria',rotaCategoria);
 app.use('/produto',rotaProduto);
+app.use('/usuario',rotaProduto);
 app.use('/cliente',rotaCliente);
 app.use('/fornecedor',rotaFornecedor);
 app.listen(porta,host, ()=>{
