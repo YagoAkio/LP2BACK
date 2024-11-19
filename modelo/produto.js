@@ -9,11 +9,12 @@ export default class Produto{
     #urlImagem;
     #dataValidade;
     #categoria;
+    #fornecedor;
 
 
     constructor(codigo=0,descricao="", precoCusto=0, 
                 precoVenda=0, qtdEstoque=0,urlImagem="", dataValidade="",
-                categoria={}){
+                categoria={},fornecedor={}){
         this.#codigo=codigo;
         this.#descricao=descricao;
         this.#precoCusto=precoCusto;
@@ -22,6 +23,7 @@ export default class Produto{
         this.#urlImagem=urlImagem;
         this.#dataValidade=dataValidade; 
         this.#categoria=categoria;
+        this.#fornecedor=fornecedor;
     }
 
     get codigo(){
@@ -88,6 +90,14 @@ export default class Produto{
         this.#categoria = novaCategoria;
     }
 
+    get fornecedor(){
+        return this.#fornecedor
+    }
+
+    set fornecedor(novoFornecedor){
+        this.#fornecedor = novoFornecedor;
+    }
+
     toJSON(){
         return {
             codigo:this.#codigo,
@@ -97,7 +107,8 @@ export default class Produto{
             qtdEstoque:this.#qtdEstoque,
             urlImagem:this.#urlImagem,
             dataValidade:this.#dataValidade,
-            categoria:this.#categoria.toJSON()
+            categoria:this.#categoria.toJSON(),
+            fornecedor:this.#fornecedor.toJSON()
         }
     }
 

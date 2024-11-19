@@ -14,12 +14,13 @@ export default class ProdutoCtrl {
             const urlImagem = requisicao.body.urlImagem;
             const dataValidade = requisicao.body.dataValidade;
             const categoria = dados.categoria;
+            const fornecedor = dados.fornecedor;
 
             if (descricao && precoCusto > 0 && precoVenda > 0
                 && qtdEstoque >= 0 && urlImagem && dataValidade && categoria) {
                 const produto = new Produto(0, descricao,precoCusto,
                                             precoVenda,qtdEstoque, urlImagem,dataValidade,
-                                            categoria);
+                                            categoria,fornecedor);
                 //resolver a promise
                 produto.gravar().then(() => {
                     resposta.status(200).json({
@@ -62,10 +63,11 @@ export default class ProdutoCtrl {
             const urlImagem = requisicao.body.urlImagem;
             const dataValidade = requisicao.body.dataValidade;
             const categoria = dados.categoria;
+            const fornecedor = dados.fornecedor;
             if (codigo && descricao && precoCusto > 0 && precoVenda > 0
                 && qtdEstoque >= 0 &&urlImagem && dataValidade && categoria) {
                 const produto = new Produto(codigo,descricao,precoCusto,
-                    precoVenda,qtdEstoque, urlImagem, dataValidade, categoria);
+                    precoVenda,qtdEstoque, urlImagem, dataValidade, categoria,fornecedor);
                 //resolver a promise
                 produto.alterar().then(() => {
                     resposta.status(200).json({
